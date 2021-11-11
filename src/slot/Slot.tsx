@@ -1,41 +1,46 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import './Slot.css';
 
 type ModuleProps = {
+  title: string,
   name: string,
   cost: number,
+  isSelected: any,
+  onSelect: any
 }
 
 type SlotProps = {
   title: string,
-  modules: ModuleProps[]
+  modules: {
+    name: string,
+    cost: number
+  }[]
 }
 
 export const Slot: FunctionComponent<SlotProps> = ({ title, modules }) => {
-  // This is a bit too extra.
-  const toggleSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const parent = event.target.parentElement;
-    // TODO: Handle error
-    const siblings = Array.from(parent?.parentElement?.children!);
-    siblings.forEach(el => el.classList.remove("selected"));
-    parent?.classList.toggle("selected");
-  }
+  const [isSelected, setSelected] = useState<number | null>(null);
 
-  const preparedModules: JSX.Element[] = modules.map(module => {
-    const displayCost: string = module.cost >= 0 ? `+${module.cost}€` : `${module.cost}€`;
-
-    return (
-      <label className="module" key={module.name}>{module.name}
-        <input type="radio" name={title} />
-        <span>{ displayCost }</span>
-      </label>
-    )
+  const preparedModules: JSX.Element[] = modules.map((module, index) => {
+    return <Module title={title} name={module.name} cost={module.cost}
+              key={module.name} isSelected={isSelected === index}
+              onSelect={() => setSelected(index)}/>
   });
 
   return (
     <article className="slot">
       <h2 className="slot-title">{ title }:</h2>
-      <div className="module-container" onChange={toggleSelected}>{ preparedModules }</div>
+      <div className="module-container">{ preparedModules }</div>
     </article>
   );
+}
+
+export const Module: FunctionComponent<ModuleProps> = ({ title, name, cost, isSelected, onSelect }) => {
+  const displayCost: string = cost >= 0 ? `+${cost}€` : `${cost}€`;
+
+  return (
+    <label className={(isSelected ? "module selected" : "module")} key={name}>{name}
+      <input type="radio" name={title} onChange={onSelect}/>
+      <span>{ displayCost }</span>
+    </label>
+  )
 }
