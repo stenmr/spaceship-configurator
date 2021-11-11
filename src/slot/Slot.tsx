@@ -1,12 +1,12 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import './Slot.css';
 
-type ModuleProps = {
+export type ModuleProps = {
   title: string,
   name: string,
   cost: number,
-  isSelected: any,
-  onSelect: any
+  isSelected: boolean,
+  onSelect: () => void
 }
 
 type SlotProps = {
@@ -34,7 +34,7 @@ export const Slot: FunctionComponent<SlotProps> = ({ title, modules }) => {
   );
 }
 
-export const Module: FunctionComponent<ModuleProps> = ({ title, name, cost, isSelected, onSelect }) => {
+const Module: FunctionComponent<ModuleProps> = ({ title, name, cost, isSelected, onSelect }) => {
   const displayCost: string = cost >= 0 ? `+${cost}€` : `${cost}€`;
 
   return (
