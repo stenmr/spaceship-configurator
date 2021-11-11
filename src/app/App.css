@@ -10,7 +10,7 @@
 }
 
 .configurator {
-  border: 1px solid #7BF762;
+  border: 1px solid #7bf762;
   border-radius: 8px;
   width: 65vw;
   display: grid;
@@ -25,13 +25,16 @@
 
 .shopping-cart {
   grid-area: shopping-cart;
+  background-color: #1c3c16;
+  border: 1px solid #7bf762;
+  border-radius: 8px;
 }
 
 .configurator h1 {
   font-weight: 400;
   margin-top: 4rem;
   margin-bottom: 4rem;
-  color: #7BF762;
+  color: #7bf762;
   font-size: 24px;
   letter-spacing: 4.8px;
   text-align: center;
