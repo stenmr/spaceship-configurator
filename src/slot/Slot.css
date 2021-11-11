@@ -1,0 +1,37 @@
+.slot {
+  margin: 1em;
+}
+
+.module-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+}
+
+.module {
+  border: 1px solid #5A8F4F;
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.module span {
+  display: block;
+}
+
+/* Is this the right approach? */
+.module input[type="radio"] {
+  display: none;
+}
+
+.selected {
+  border-color: #7BF762;
+  box-shadow: 0 0 10px #7BF762;
+}
+
+.slot-title {
+  color: #7BF762;
+  font-size: 18px;
+  font-weight: 400;
+}
