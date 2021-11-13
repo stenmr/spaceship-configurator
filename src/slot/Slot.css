@@ -9,13 +9,13 @@
 }
 
 .module {
+  width: var(--module-width);
+  padding: .75rem;
   border: 1px solid var(--accent-color-dimmed);
   border-radius: 8px;
   font-size: 14px;
-  padding: .75rem;
-  text-align: center;
   letter-spacing: 1.4px;
-  width: var(--module-width);
+  text-align: center;
 }
 
 .module .cost {
@@ -30,9 +30,9 @@
 }
 
 .selected {
-  color: var(--accent-color);
   border-color: var(--accent-color);
   box-shadow: 0 0 10px var(--accent-color);
+  color: var(--accent-color);
 }
 
 .slot-title {

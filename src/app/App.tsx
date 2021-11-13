@@ -27,7 +27,7 @@ export const App = () => {
   useEffect(() => setTotalCost(calculateTotalCost(cart)), [cart])
 
   return (
-    <main className="App">
+    <main className="app">
       <section className="configurator">
         <h1>Spaceship configurator</h1>
         <div className="categories">
