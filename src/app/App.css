@@ -56,6 +56,11 @@
   color: var(--accent-color-alt);
 }
 
+.shopping-cart-list > .total-cost {
+  font-size: 18px;
+  letter-spacing: 3.6px;
+}
+
 .shopping-cart-list {
   display: grid;
   margin: 1rem;
@@ -65,7 +70,7 @@
   right hand side of the grid while still remaining left-aligned
   across two grids. Beyond 8 digits the grid will still function,
   although without left-aligned digits. */
-  grid-template-columns: 1fr minmax(calc(8 * 2.8px + 8ch), min-content);
+  grid-template-columns: 1fr minmax(11ch, min-content);
   white-space: nowrap;
 }
 
