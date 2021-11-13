@@ -19,25 +19,26 @@
   border-radius: 8px;
   font-size: 14px;
   gap: .25rem;
-  letter-spacing: 1.4px;
+  letter-spacing: .1em;
   text-align: center;
   transition-duration: .15s;
   transition-property: border, box-shadow, color;
-}
-
-.module > *:first-child {
-  margin-top: .75rem;
+  padding-top: .75rem;
 }
 
 .module .name {
-  margin-bottom: .25rem;
+  margin-bottom: .5rem;
+}
+
+.module .cost + .name {
+  margin-bottom: 1rem;
 }
 
 .module :not(.name) + .cost {
   display: block;
-  margin: 0 .5rem .5rem;
+  margin-bottom: .5rem;
   font-size: 12px;
-  letter-spacing: 1.2px;
+  letter-spacing: .1em;
 }
 
 /* Is this the right approach when considering accessibility? */

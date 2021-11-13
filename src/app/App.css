@@ -16,7 +16,7 @@
   background-color: var(--background-color);
   color: var(--accent-color-dimmed);
   font-size: calc(10px + 2vmin);
-  letter-spacing: 2.8px;
+  letter-spacing: .2em;
 }
 
 .configurator {
@@ -43,6 +43,6 @@
   font-size: 24px;
   font-weight: 400;
   grid-area: title;
-  letter-spacing: 4.8px;
+  letter-spacing: .2em;
   text-align: center;
 }

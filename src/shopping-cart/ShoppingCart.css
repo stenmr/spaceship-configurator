@@ -8,6 +8,7 @@
   border-radius: 8px;
   color: var(--accent-color);
   font-size: 14px;
+  letter-spacing: .2em;
 }
 
 .shopping-cart-list > .cost {
@@ -28,7 +29,7 @@
 
 .shopping-cart-list:nth-of-type(2) {
   font-size: 18px;
-  letter-spacing: 3.6px;
+  letter-spacing: .2em;
 }
 
 /* The shopping cart will only have 5 categories at most. Beyond
