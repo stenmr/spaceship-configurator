@@ -18,10 +18,10 @@ export const App = () => {
   const displayCart = (cart: PseudoModuleProps[]) => {
     const sortedCart = cart.sort((a, b) => a.category < b.category ? -1 : 1);
     // We will need to special-case the `Base price` to not have a leading plus sign.
-    return sortedCart.map(m => <>
+    return sortedCart.map((m, index) => <React.Fragment key={index}>
       <span className="item">{ m.category }:</span>
       <span className="cost">{ m.category === "Base price" ? (`${m.cost}€`) : displayCost(m.cost) }</span>
-    </>)
+    </React.Fragment>)
   };
 
   useEffect(() => setTotalCost(calculateTotalCost(cart)), [cart])

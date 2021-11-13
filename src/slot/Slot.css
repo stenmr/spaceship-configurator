@@ -1,5 +1,9 @@
 .slot {
-  margin: 1em;
+  position: relative;
+}
+
+.categories > .slot + .slot {
+  margin-top: 4rem;
 }
 
 .module-container {
@@ -16,6 +20,10 @@
   font-size: 14px;
   letter-spacing: 1.4px;
   text-align: center;
+  transition-duration: .15s;
+  transition-property: border, box-shadow, color;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .module .cost {
@@ -36,8 +44,15 @@
 }
 
 .slot-title {
+  position: absolute;
+  margin-top: 0;
   color: var(--accent-color);
   font-size: 18px;
   font-weight: 400;
   letter-spacing: normal;
+
+  /* If we want the top of the cart to align with the first row
+  of modules, rather than the title of the category, this is what
+  we must do. */
+  transform: translateY(calc(-18px - 1rem));
 }

@@ -15,6 +15,7 @@
             "pt"
         ],
         "selector-list-comma-newline-after": "always",
-        "no-missing-end-of-source-newline": null
+        "no-missing-end-of-source-newline": null,
+        "property-no-vendor-prefix": null
     }
 }
