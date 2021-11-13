@@ -9,29 +9,35 @@
 }
 
 .module {
-  border: 1px solid #5A8F4F;
+  border: 1px solid var(--accent-color-dimmed);
   border-radius: 8px;
   font-size: 14px;
-  padding: 1rem;
+  padding: .75rem;
   text-align: center;
+  letter-spacing: 1.4px;
+  width: var(--module-width);
 }
 
-.module span {
+.module .cost {
   display: block;
+  font-size: 12px;
+  letter-spacing: 1.2px;
 }
 
-/* Is this the right approach? */
+/* Is this the right approach when considering accessibility? */
 .module input[type="radio"] {
   display: none;
 }
 
 .selected {
-  border-color: #7BF762;
-  box-shadow: 0 0 10px #7BF762;
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 10px var(--accent-color);
 }
 
 .slot-title {
-  color: #7BF762;
+  color: var(--accent-color);
   font-size: 18px;
   font-weight: 400;
+  letter-spacing: normal;
 }

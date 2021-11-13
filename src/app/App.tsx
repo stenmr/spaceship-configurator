@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PseudoModuleProps, Slot } from '../slot/Slot';
 import './App.css';
 
-function App() {
+export const App = () => {
   const [cart, setCart] = useState<PseudoModuleProps[]>([{category: "Base price", name: "", cost: 1000}]);
   const [totalCost, setTotalCost] = useState<number>(0);
 
@@ -15,6 +15,15 @@ function App() {
     return cart.reduce((totalCost, module: PseudoModuleProps) => totalCost + module.cost, 0);
   };
 
+  const displayCart = (cart: PseudoModuleProps[]) => {
+    const sortedCart = cart.sort((a, b) => a.category < b.category ? -1 : 1);
+    // We will need to special-case the `Base price` to not have a leading plus sign.
+    return sortedCart.map(m => <>
+      <span className="item">{ m.category }:</span>
+      <span className="cost">{ m.category === "Base price" ? (`${m.cost}€`) : displayCost(m.cost) }</span>
+    </>)
+  };
+
   useEffect(() => setTotalCost(calculateTotalCost(cart)), [cart])
 
   return (
@@ -23,29 +32,43 @@ function App() {
         <h1>Spaceship configurator</h1>
         <div className="categories">
           <Slot title="Select color" modules={[
-            { category: "color", name: "Snow", cost: 0 },
-            { category: "color", name: "Volcano", cost: 100 },
-            { category: "color", name: "Sky", cost: 100 }
+            { category: "Color", name: "Snow", cost: 0 },
+            { category: "Color", name: "Volcano", cost: 100 },
+            { category: "Color", name: "Sky", cost: 100 }
           ]} categorySelect={ addToCart }/>
           <Slot title="Select power" modules={[
-            { category: "power", name: "100 MW", cost: 0 },
-            { category: "power", name: "150 MW", cost: 200 },
-            { category: "power", name: "200 MW", cost: 500 }
+            { category: "Power", name: "100 MW", cost: 0 },
+            { category: "Power", name: "150 MW", cost: 200 },
+            { category: "Power", name: "200 MW", cost: 500 }
           ]} categorySelect={ addToCart }/>
           <Slot title="Warp drive" modules={[
-            { category: "warp drive", name: "NO", cost: 0 },
-            { category: "warp drive", name: "YES", cost: 1000 }
+            { category: "Warp drive", name: "NO", cost: 0 },
+            { category: "Warp drive", name: "YES", cost: 1000 }
           ]} categorySelect={ addToCart }/>
           {/* <Slot title="Select option package">
             </Slot> */}
         </div>
-        <div className="shopping-cart">
-          <div className="shopping-cart-list"></div>
-          <div className="shopping-cart-total">Total: { totalCost }</div>
+        <div className="shopping-cart-container">
+          <div className="shopping-cart">
+            <div className="shopping-cart-list">
+                { displayCart(cart) }
+            </div>
+            <hr />
+            <div className="shopping-cart-list">
+              <span className="item">Total:</span>
+              <span className="cost">{ totalCost }€</span>
+            </div>
           </div>
+        </div>
       </section>
     </main>
   );
 }
 
-export default App;
+/**
+ * Converts a number to an explicitly signed string with a trailing `€`,
+ * so it'll always have a `+` or a `-`.
+ */
+export function displayCost(cost: number): string {
+  return cost >= 0 ? `+${cost}€` : `${cost}€`
+};

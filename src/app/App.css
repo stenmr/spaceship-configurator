@@ -1,16 +1,26 @@
+:root {
+  --accent-color: #7bf762;
+  --accent-color-dimmed: #5a8f4f;
+  --accent-color-alt: white;
+  --background-color: #051544;
+  --background-color-alt: #1c3c16;
+  --module-width: 8rem;
+}
+
 .App {
-  background-color: #051544;
+  background-color: var(--background-color);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: var(--accent-color-dimmed);
+  letter-spacing: 2.8px;
 }
 
 .configurator {
-  border: 1px solid #7bf762;
+  border: 1px solid var(--accent-color);
   border-radius: 8px;
   width: 65vw;
   display: grid;
@@ -23,18 +33,35 @@
   grid-area: modules;
 }
 
-.shopping-cart {
+.shopping-cart-container {
   grid-area: shopping-cart;
-  background-color: #1c3c16;
-  border: 1px solid #7bf762;
+  background-color: var(--background-color-alt);
+  border: 1px solid var(--accent-color);
   border-radius: 8px;
+  color: var(--accent-color);
+}
+
+.shopping-cart {
+  font-size: 14px;
+}
+
+.shopping-cart .cost {
+  color: var(--accent-color-alt);
+}
+
+.shopping-cart-list {
+  margin: 1rem;
+}
+
+.shopping-cart hr {
+  color: var(--accent-color);
 }
 
 .configurator h1 {
   font-weight: 400;
   margin-top: 4rem;
   margin-bottom: 4rem;
-  color: #7bf762;
+  color: var(--accent-color);
   font-size: 24px;
   letter-spacing: 4.8px;
   text-align: center;

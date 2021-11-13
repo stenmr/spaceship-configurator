@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useState } from 'react';
+import { displayCost } from '../app/App';
 import './Slot.css';
 
 type ModuleProps = {
@@ -44,12 +45,10 @@ export const Slot: FunctionComponent<SlotProps> = ({ title, modules, categorySel
 }
 
 const Module: FunctionComponent<ModuleProps> = ({ title, name, cost, isSelected, onSelect }) => {
-  const displayCost: string = cost >= 0 ? `+${cost}€` : `${cost}€`;
-
   return (
     <label className={(isSelected ? "module selected" : "module")} key={name}>{name}
       <input type="radio" name={title} onChange={onSelect}/>
-      <span>{ displayCost }</span>
+      <span className="cost">{ displayCost(cost) }</span>
     </label>
   )
 }
