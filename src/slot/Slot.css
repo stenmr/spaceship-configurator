@@ -1,3 +1,7 @@
+:root {
+  --module-width: min(12.5rem, 25vmin);
+}
+
 .slot {
   position: relative;
 }
@@ -15,6 +19,7 @@
 .module {
   display: grid;
   width: var(--module-width);
+  padding-top: .75rem;
   border: 1px solid var(--accent-color-dimmed);
   border-radius: 8px;
   font-size: 14px;
@@ -23,7 +28,6 @@
   text-align: center;
   transition-duration: .15s;
   transition-property: border, box-shadow, color;
-  padding-top: .75rem;
 }
 
 .module .name {
@@ -34,7 +38,7 @@
   margin-bottom: 1rem;
 }
 
-.module :not(.name) + .cost {
+.module .cost {
   display: block;
   margin-bottom: .5rem;
   font-size: 12px;
@@ -74,7 +78,13 @@
 }
 
 .option-module {
-  grid-template-rows: 1rem 1rem 1fr;
+  grid-template-rows: 1rem 2rem 1fr;
+}
+
+.option-module .cost {
+  font-size: 14px;
+  letter-spacing: .1em;
+  padding-block: .5rem;
 }
 
 .package-details {
@@ -82,7 +92,15 @@
   background-color: var(--background-color-alt);
   border-radius: 8px;
   font-size: 12px;
+  letter-spacing: normal;
   list-style-type: "▲";
-  padding-inline: 1rem;
+  padding-block: 1rem;
+  padding-inline-end: 1rem;
+  padding-inline-start: 1.5rem;
   text-align: left;
+}
+
+.package-details > li {
+  line-height: 1.75;
+  padding-inline-start: .5rem;
 }

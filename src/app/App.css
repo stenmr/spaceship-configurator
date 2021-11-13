@@ -4,7 +4,6 @@
   --accent-color-alt: white;
   --background-color: #051544;
   --background-color-alt: #1c3c16;
-  --module-width: min(12rem, 25vmin);
 }
 
 .app {
