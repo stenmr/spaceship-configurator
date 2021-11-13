@@ -1,5 +1,5 @@
-import React, { FunctionComponent, useState } from 'react';
-import { displayCost } from '../app/App';
+import { FunctionComponent, useState } from 'react';
+import { displayCost } from '../shopping-cart/ShoppingCart';
 import './Slot.css';
 
 export enum Category {
@@ -13,7 +13,7 @@ export enum Category {
 interface ModuleProps extends SimpleModuleProps {
   isSelected: boolean,
   onSelect: () => void
-}
+};
 
 export interface SimpleModuleProps {
   category: Category,
@@ -21,13 +21,13 @@ export interface SimpleModuleProps {
   packageDetails?: string[],
   name: string,
   cost: number
-}
+};
 
 type SlotProps = {
   title: String,
   modules: SimpleModuleProps[],
   categorySelect: (moduleProps: SimpleModuleProps) => void
-}
+};
 
 export const Slot: FunctionComponent<SlotProps> = ({ title, modules, categorySelect }) => {
   const [isSelected, setSelected] = useState<number | null>(null);
@@ -35,7 +35,7 @@ export const Slot: FunctionComponent<SlotProps> = ({ title, modules, categorySel
   const handleSelect = (index: number) => {
     setSelected(index);
     categorySelect(modules[index]);
-  }
+  };
 
   const preparedModules: JSX.Element[] = modules.map((module, index) => {
     if (module.color != null) {
@@ -50,7 +50,7 @@ export const Slot: FunctionComponent<SlotProps> = ({ title, modules, categorySel
       return <Module category={module.category} name={module.name} cost={module.cost}
               key={module.name} isSelected={isSelected === index}
               onSelect={() => {handleSelect(index)}}/>
-    }
+    };
   });
 
   return (
@@ -59,7 +59,7 @@ export const Slot: FunctionComponent<SlotProps> = ({ title, modules, categorySel
       <div className="module-container">{ preparedModules }</div>
     </article>
   );
-}
+};
 
 const Module: FunctionComponent<ModuleProps> = ({ category, name, cost, isSelected, onSelect }) => {
   return (
@@ -68,8 +68,8 @@ const Module: FunctionComponent<ModuleProps> = ({ category, name, cost, isSelect
       <input type="radio" name={category} onChange={onSelect}/>
       <span className="cost">{ displayCost(cost) }</span>
     </label>
-  )
-}
+  );
+};
 
 const ColorModule: FunctionComponent<ModuleProps> = ({ category, color, name, cost, isSelected, onSelect }) => {
   return (
@@ -79,8 +79,8 @@ const ColorModule: FunctionComponent<ModuleProps> = ({ category, color, name, co
       <span className="cost">{ displayCost(cost) }</span>
       <span className="name">{name}</span>
     </label>
-  )
-}
+  );
+};
 
 const OptionPackageModule: FunctionComponent<ModuleProps> = ({ category, name, packageDetails, cost, isSelected, onSelect }) => {
   return (
@@ -92,5 +92,5 @@ const OptionPackageModule: FunctionComponent<ModuleProps> = ({ category, name, p
         { packageDetails?.map((s, index) => <li key={ index }>{ s }</li>) }
       </ul>
     </label>
-  )
-}
+  );
+};
