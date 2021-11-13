@@ -2,13 +2,21 @@ import React, { FunctionComponent, useState } from 'react';
 import { displayCost } from '../app/App';
 import './Slot.css';
 
+export enum Category {
+  BasePrice = "Base price",
+  Color = "Color",
+  Power = "Power",
+  WarpDrive = "Warp drive",
+  OptionPackage = "Option package"
+}
+
 interface ModuleProps extends SimpleModuleProps {
   isSelected: boolean,
   onSelect: () => void
 }
 
 export interface SimpleModuleProps {
-  category: string,
+  category: Category,
   color?: string,
   packageDetails?: string[],
   name: string,
@@ -16,12 +24,12 @@ export interface SimpleModuleProps {
 }
 
 type SlotProps = {
-  category: string,
+  title: String,
   modules: SimpleModuleProps[],
   categorySelect: (moduleProps: SimpleModuleProps) => void
 }
 
-export const Slot: FunctionComponent<SlotProps> = ({ category, modules, categorySelect }) => {
+export const Slot: FunctionComponent<SlotProps> = ({ title, modules, categorySelect }) => {
   const [isSelected, setSelected] = useState<number | null>(null);
 
   const handleSelect = (index: number) => {
@@ -31,15 +39,15 @@ export const Slot: FunctionComponent<SlotProps> = ({ category, modules, category
 
   const preparedModules: JSX.Element[] = modules.map((module, index) => {
     if (module.color != null) {
-      return <ColorModule category={category} color={module.color} name={module.name} cost={module.cost}
+      return <ColorModule category={module.category} color={module.color} name={module.name} cost={module.cost}
               key={module.name} isSelected={isSelected === index}
               onSelect={() => {handleSelect(index)}}/>
     } else if (module.packageDetails != null) {
-      return <OptionPackageModule category={category} name={module.name} packageDetails={module.packageDetails}
+      return <OptionPackageModule category={module.category} name={module.name} packageDetails={module.packageDetails}
               cost={module.cost} key={module.name} isSelected={isSelected === index}
               onSelect={() => {handleSelect(index)}}/>
     } else {
-      return <Module category={category} name={module.name} cost={module.cost}
+      return <Module category={module.category} name={module.name} cost={module.cost}
               key={module.name} isSelected={isSelected === index}
               onSelect={() => {handleSelect(index)}}/>
     }
@@ -47,7 +55,7 @@ export const Slot: FunctionComponent<SlotProps> = ({ category, modules, category
 
   return (
     <article className="slot">
-      <h2 className="slot-category">{ category }:</h2>
+      <h2 className="slot-category">{ title }:</h2>
       <div className="module-container">{ preparedModules }</div>
     </article>
   );

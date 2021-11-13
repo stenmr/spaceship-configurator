@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { SimpleModuleProps, Slot } from '../slot/Slot';
+import { Category, SimpleModuleProps, Slot } from '../slot/Slot';
 import './App.css';
 
 export const App = () => {
-  const [cart, setCart] = useState<SimpleModuleProps[]>([{category: "Base price", name: "", cost: 1000}]);
+  const [cart, setCart] = useState<SimpleModuleProps[]>([{category: Category.BasePrice, name: "", cost: 1000}]);
   const [totalCost, setTotalCost] = useState<number>(0);
 
-  // TODO: This should be an enum
-  const customOrdering = [
-    "Base price",
-    "Color",
-    "Power",
-    "Warp drive",
-    "Option package"
+  // Shopping cart item ordering
+  const categoryOrdering = [
+    Category.BasePrice,
+    Category.Color,
+    Category.Power,
+    Category.WarpDrive,
+    Category.OptionPackage
   ];
 
   const addToCart = (module: SimpleModuleProps) => {
@@ -25,7 +25,7 @@ export const App = () => {
   };
 
   const displayCart = (cart: SimpleModuleProps[]) => {
-    const sortedCart = cart.sort((a, b) => customOrdering.findIndex(el => el === a.category) < customOrdering.findIndex(el => el === b.category) ? -1 : 1);
+    const sortedCart = cart.sort((a, b) => categoryOrdering.findIndex(el => el === a.category) < categoryOrdering.findIndex(el => el === b.category) ? -1 : 1);
     // We will need to special-case the `Base price` to not have a leading plus sign.
     return sortedCart.map((m, index) => <React.Fragment key={index}>
       <span className="item">{ m.category }:</span>
@@ -40,33 +40,33 @@ export const App = () => {
       <section className="configurator">
         <h1>Spaceship configurator</h1>
         <div className="categories">
-          <Slot category="Select color" modules={[
-            { category: "Color", color: "white", name: "Snow", cost: 0 },
-            { category: "Color", color: "#ff7a00", name: "Volcano", cost: 100 },
-            { category: "Color", color: "#6be4ff", name: "Sky", cost: 100 }
+          <Slot title="Select color" modules={[
+            { category: Category.Color, color: "white", name: "Snow", cost: 0 },
+            { category:  Category.Color, color: "#ff7a00", name: "Volcano", cost: 100 },
+            { category:  Category.Color, color: "#6be4ff", name: "Sky", cost: 100 }
           ]} categorySelect={ addToCart }/>
-          <Slot category="Select power" modules={[
-            { category: "Power", name: "100 MW", cost: 0 },
-            { category: "Power", name: "150 MW", cost: 200 },
-            { category: "Power", name: "200 MW", cost: 500 }
+          <Slot title="Select power" modules={[
+            { category:  Category.Power, name: "100 MW", cost: 0 },
+            { category: Category.Power, name: "150 MW", cost: 200 },
+            { category: Category.Power, name: "200 MW", cost: 500 }
           ]} categorySelect={ addToCart }/>
-          <Slot category="Warp drive" modules={[
-            { category: "Warp drive", name: "NO", cost: 0 },
-            { category: "Warp drive", name: "YES", cost: 1000 }
+          <Slot title="Warp drive" modules={[
+            { category: Category.WarpDrive, name: "NO", cost: 0 },
+            { category: Category.WarpDrive, name: "YES", cost: 1000 }
           ]} categorySelect={ addToCart }/>
-          <Slot category="Select option package" modules={[
-            { category: "Option package", name: "Basic", cost: 0, packageDetails: [
+          <Slot title="Select option package" modules={[
+            { category: Category.OptionPackage, name: "Basic", cost: 0, packageDetails: [
               "Air conditioning",
               "Cloth seats",
               "Fm radio"
             ] },
-            { category: "Option package", name: "Sport", cost: 100, packageDetails: [
+            { category: Category.OptionPackage, name: "Sport", cost: 100, packageDetails: [
               "Air conditioning",
               "Cloth seats",
               "Fm radio",
               "Personal tech support"
             ] },
-            { category: "Option package", name: "Lux", cost: 500, packageDetails: [
+            { category: Category.OptionPackage, name: "Lux", cost: 500, packageDetails: [
               "Air conditioning",
               "Luxury seats",
               "Fm radio",
