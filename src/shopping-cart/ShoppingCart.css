@@ -3,45 +3,60 @@
 }
 
 .shopping-cart {
+  display: grid;
+  padding: 1rem 0;
   border: 1px solid var(--accent-color);
   background-color: var(--background-color-alt);
   border-radius: 8px;
   color: var(--accent-color);
   font-size: 14px;
-  letter-spacing: .2em;
-}
-
-.shopping-cart-list > .cost {
-  color: var(--accent-color-alt);
-}
-
-.shopping-cart-list {
-  display: grid;
-  margin: 1rem;
   gap: .5rem;
 
   /* We do this to fit a price of up to ~5 digits long on the
   right hand side of the grid while still remaining left-aligned
   across two grids. Beyond ~5 digits the grid will still function,
   although without left-aligned digits. */
-  grid-template-columns: 1fr minmax(80px, min-content);
+  grid-template-columns: 5fr 1fr;
+  letter-spacing: .2em;
+  line-height: 1.75;
 }
 
-.shopping-cart-list:nth-of-type(2) {
-  font-size: 18px;
-  letter-spacing: .2em;
+.shopping-cart > .costs {
+  color: var(--accent-color-alt);
+  justify-self: start;
+  margin-inline-end: 1rem;
+}
+
+.items {
+  margin-inline: 1rem;
 }
 
 /* The shopping cart will only have 5 categories at most. Beyond
 that the cart will need to be resized. */
-.shopping-cart-list:first-of-type {
+.items:not(.total),
+.costs:not(.total) {
+  display: grid;
   grid-template-rows: repeat(5, 1fr);
 }
 
+.shopping-cart > .total {
+  font-size: 18px;
+  letter-spacing: .2em;
+}
+
 /* This style is consistent across Chromium and Firefox. */
-.shopping-cart > hr {
+.shopping-cart hr {
+  height: 0;
   border: .5px solid;
+  margin: 0;
   background-color: var(--accent-color);
   color: var(--accent-color);
-  margin-block: 0;
+  grid-column: 1 / span 2;
+}
+
+/* Mobile */
+@media screen and (max-width: 1000px) {
+  .shopping-cart {
+    margin: min(1vmin, 1rem);
+  }
 }

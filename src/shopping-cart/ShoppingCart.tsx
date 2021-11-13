@@ -30,27 +30,39 @@ export const ShoppingCart: FunctionComponent<ShoppingCartProps> = ({ cart }) => 
     return cart.reduce((totalCost, module: SimpleModuleProps) => totalCost + module.cost, 0);
   };
 
-  const displayCart = (cart: SimpleModuleProps[]) => {
-    const sortedCart = cart.sort((a, b) => categoryOrdering.findIndex(el => el === a.category) < categoryOrdering.findIndex(el => el === b.category) ? -1 : 1);
+  const displayCart = (cart: SimpleModuleProps[]): JSX.Element[][] => {
+    const sortedCart = cart.sort((a, b) =>
+      categoryOrdering.findIndex(el => el === a.category)
+      < categoryOrdering.findIndex(el => el === b.category)
+      ? -1 : 1
+    );
+    const items: JSX.Element[] = [];
+    const costs: JSX.Element[] = [];
+
     // We will need to special-case the `Base price` to not have a leading plus sign.
-    return sortedCart.map((m, index) => <React.Fragment key={index}>
-      <span className="item">{ m.category }:</span>
-      <span className="cost">{ m.category === "Base price" ? (`${m.cost}€`) : displayCost(m.cost) }</span>
-    </React.Fragment>)
+    sortedCart.forEach((m, index) => {
+      items.push(<span className="item">{ m.category }:</span>);
+      costs.push(<span className="cost">{ m.category === "Base price" ? (`${m.cost}€`) : displayCost(m.cost) }</span>);
+    })
+
+    return [items, costs];
   };
 
   useEffect(() => setTotalCost(calculateTotalCost(cart)), [cart]);
 
+  const [items, costs] = displayCart(cart);
+
   return (
     <div className="shopping-cart-container">
       <div className="shopping-cart">
-        <div className="shopping-cart-list">
-            { displayCart(cart) }
-        </div>
+        <div className="items">{items}</div>
+        <div className="costs">{costs}</div>
         <hr />
-        <div className="shopping-cart-list">
+        <div className="total items">
           <span className="item">Total:</span>
-          <span className="cost total-cost">{ totalCost }€</span>
+        </div>
+        <div className="total costs">
+          <span className="total-cost cost">{ totalCost }€</span>
         </div>
       </div>
     </div>

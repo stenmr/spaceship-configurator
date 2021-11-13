@@ -1,7 +1,3 @@
-:root {
-  --module-width: min(12.5rem, 25vmin);
-}
-
 .slot {
   position: relative;
 }
@@ -12,13 +8,14 @@
 
 .module-container {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   gap: 1.5rem;
 }
 
 .module {
   display: grid;
-  width: var(--module-width);
+  overflow: hidden;
+  flex: 0 1 11rem;
   padding-top: .75rem;
   border: 1px solid var(--accent-color-dimmed);
   border-radius: 8px;
@@ -57,17 +54,12 @@
 }
 
 .slot-category {
-  position: absolute;
   margin-top: 0;
   color: var(--accent-color);
   font-size: 18px;
   font-weight: 400;
   letter-spacing: normal;
-
-  /* If we want the top of the cart to align with the first row
-  of modules, rather than the title of the category, this is what
-  we must do. */
-  transform: translateY(calc(-18px - 1rem));
+  white-space: nowrap;
 }
 
 .color-box {
@@ -88,6 +80,7 @@
 }
 
 .package-details {
+  overflow: hidden;
   margin: 0;
   background-color: var(--background-color-alt);
   border-radius: 8px;
@@ -98,9 +91,36 @@
   padding-inline-end: 1rem;
   padding-inline-start: 1.5rem;
   text-align: left;
+  word-wrap: break-word;
 }
 
 .package-details > li {
   line-height: 1.75;
   padding-inline-start: .5rem;
+}
+
+/* Desktop */
+@media screen and (min-width: 1000px) {
+  /* If we want the top of the cart to align with the first row
+  of modules, rather than the title of the category, this is what
+  we must do. */
+  .slot-category {
+    position: absolute;
+    transform: translateY(calc(-18px - 1rem));
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 1000px) {
+  .module-container {
+    justify-content: center;
+  }
+
+  .module {
+    flex: 0 1 10rem;
+  }
+
+  .slot-category {
+    text-align: center;
+  }
 }
