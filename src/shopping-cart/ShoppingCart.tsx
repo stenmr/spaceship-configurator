@@ -14,6 +14,11 @@ export const displayCost = (cost: number) => {
   return cost >= 0 ? `+${cost}€` : `${cost}€`
 };
 
+type Pair<T> = {
+  left: T,
+  right: T,
+}
+
 export const ShoppingCart: FunctionComponent<ShoppingCartProps> = ({ cart }) => {
   const [totalCost, setTotalCost] = useState<number>(0);
 
@@ -30,7 +35,7 @@ export const ShoppingCart: FunctionComponent<ShoppingCartProps> = ({ cart }) => 
     return cart.reduce((totalCost, module: SimpleModuleProps) => totalCost + module.cost, 0);
   };
 
-  const displayCart = (cart: SimpleModuleProps[]): JSX.Element[][] => {
+  const displayCart = (cart: SimpleModuleProps[]): Pair<JSX.Element[]> => {
     const sortedCart = cart.sort((a, b) =>
       categoryOrdering.findIndex(el => el === a.category)
       < categoryOrdering.findIndex(el => el === b.category)
@@ -45,24 +50,24 @@ export const ShoppingCart: FunctionComponent<ShoppingCartProps> = ({ cart }) => 
       costs.push(<span className="cost">{ m.category === "Base price" ? (`${m.cost}€`) : displayCost(m.cost) }</span>);
     })
 
-    return [items, costs];
+    return { left: items, right: costs};
   };
 
   useEffect(() => setTotalCost(calculateTotalCost(cart)), [cart]);
 
-  const [items, costs] = displayCart(cart);
+  const { left: items, right: costs } = displayCart(cart);
 
   return (
     <div className="shopping-cart-container">
       <div className="shopping-cart">
-        <div className="items">{items}</div>
-        <div className="costs">{costs}</div>
+        <div className="items">{ items }</div>
+        <div className="costs">{ costs }</div>
         <hr />
         <div className="total items">
           <span className="item">Total:</span>
         </div>
         <div className="total costs">
-          <span className="total-cost cost">{ totalCost }€</span>
+          <span className="cost">{ totalCost }€</span>
         </div>
       </div>
     </div>
