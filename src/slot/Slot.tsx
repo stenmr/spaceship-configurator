@@ -47,7 +47,7 @@ export const Slot: FunctionComponent<SlotProps> = ({ category, modules, category
 
   return (
     <article className="slot">
-      <h2 className="slot-title">{ category }:</h2>
+      <h2 className="slot-category">{ category }:</h2>
       <div className="module-container">{ preparedModules }</div>
     </article>
   );
@@ -55,7 +55,8 @@ export const Slot: FunctionComponent<SlotProps> = ({ category, modules, category
 
 const Module: FunctionComponent<ModuleProps> = ({ category, name, cost, isSelected, onSelect }) => {
   return (
-    <label className={(isSelected ? "module selected" : "module")} key={name}>{name}
+    <label className={(isSelected ? "module selected" : "module")} key={name}>
+      <span className="name">{name}</span>
       <input type="radio" name={category} onChange={onSelect}/>
       <span className="cost">{ displayCost(cost) }</span>
     </label>
@@ -68,18 +69,20 @@ const ColorModule: FunctionComponent<ModuleProps> = ({ category, color, name, co
       <div className="color-box" style={{ backgroundColor: color }}></div>
       <input type="radio" name={category} onChange={onSelect}/>
       <span className="cost">{ displayCost(cost) }</span>
-      {name}
+      <span className="name">{name}</span>
     </label>
   )
 }
 
 const OptionPackageModule: FunctionComponent<ModuleProps> = ({ category, name, packageDetails, cost, isSelected, onSelect }) => {
   return (
-    <label className={(isSelected ? "module selected" : "module")} key={name}>{name}
+    <label className={(isSelected ? "option-module module selected" : "option-module module")} key={name}>
+      <span className="name">{name}</span>
       <input type="radio" name={category} onChange={onSelect}/>
-      {
-        cost !== 0 && <div className="cost">{ displayCost(cost) }</div>
-      }
+      <div className="cost">{ cost !== 0 && displayCost(cost) }</div>
+      <ul className="package-details">
+        { packageDetails?.map((s, index) => <li key={ index }>{ s }</li>) }
+      </ul>
     </label>
   )
 }

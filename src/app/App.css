@@ -4,7 +4,7 @@
   --accent-color-alt: white;
   --background-color: #051544;
   --background-color-alt: #1c3c16;
-  --module-width: 8rem;
+  --module-width: min(12rem, 25vmin);
 }
 
 .app {
@@ -21,7 +21,7 @@
 
 .configurator {
   display: grid;
-  width: min(944px, 90vw);
+  width: min(1000px, 90vw);
   padding: 2rem;
   border: 1px solid var(--accent-color);
   border-radius: 8px;
@@ -48,17 +48,8 @@
   font-size: 14px;
 }
 
-.shopping-cart-list > .item {
-  margin-right: 1rem;
-}
-
 .shopping-cart-list > .cost {
   color: var(--accent-color-alt);
-}
-
-.shopping-cart-list > .total-cost {
-  font-size: 18px;
-  letter-spacing: 3.6px;
 }
 
 .shopping-cart-list {
@@ -66,12 +57,16 @@
   margin: 1rem;
   gap: .5rem;
 
-  /* We do this to fit a price of up to 8 digits long on the
+  /* We do this to fit a price of up to ~5 digits long on the
   right hand side of the grid while still remaining left-aligned
-  across two grids. Beyond 8 digits the grid will still function,
+  across two grids. Beyond ~5 digits the grid will still function,
   although without left-aligned digits. */
-  grid-template-columns: 1fr minmax(11ch, min-content);
-  white-space: nowrap;
+  grid-template-columns: 1fr minmax(80px, min-content);
+}
+
+.shopping-cart-list:nth-of-type(2) {
+  font-size: 18px;
+  letter-spacing: 3.6px;
 }
 
 /* The shopping cart will only have 5 categories at most. Beyond
@@ -80,8 +75,12 @@ that the cart will need to be resized. */
   grid-template-rows: repeat(5, 1fr);
 }
 
+/* This style is consistent across Chromium and Firefox. */
 .shopping-cart > hr {
+  border: .5px solid;
+  background-color: var(--accent-color);
   color: var(--accent-color);
+  margin-block: 0;
 }
 
 .configurator h1 {

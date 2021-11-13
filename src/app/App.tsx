@@ -55,9 +55,25 @@ export const App = () => {
             { category: "Warp drive", name: "YES", cost: 1000 }
           ]} categorySelect={ addToCart }/>
           <Slot category="Select option package" modules={[
-            { category: "Option package", name: "Basic", cost: 0 },
-            { category: "Option package", name: "Sport", cost: 100 },
-            { category: "Option package", name: "Lux", cost: 500 }
+            { category: "Option package", name: "Basic", cost: 0, packageDetails: [
+              "Air conditioning",
+              "Cloth seats",
+              "Fm radio"
+            ] },
+            { category: "Option package", name: "Sport", cost: 100, packageDetails: [
+              "Air conditioning",
+              "Cloth seats",
+              "Fm radio",
+              "Personal tech support"
+            ] },
+            { category: "Option package", name: "Lux", cost: 500, packageDetails: [
+              "Air conditioning",
+              "Luxury seats",
+              "Fm radio",
+              "Chrome wheels",
+              "Window tint",
+              "Subwoofer"
+            ] }
           ]} categorySelect={ addToCart }/>
         </div>
         <div className="shopping-cart-container">
