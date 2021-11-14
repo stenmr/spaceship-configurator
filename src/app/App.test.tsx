@@ -1,9 +1,15 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { App } from './App';
+import { Category } from '../slot/Slot';
 
-test('renders learn react link', () => {
+test('selecting a module adds it to cart', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+  expect(screen.queryByText(Category.OptionPackage + ":")).toBeNull();
+
+  const optionPackageModule = screen.getByText("Sport").parentElement!;
+  fireEvent.click(optionPackageModule);
+
+  const optionPackageInCart = screen.getByText(Category.OptionPackage + ":");
+  expect(optionPackageInCart).toBeInTheDocument();
 });

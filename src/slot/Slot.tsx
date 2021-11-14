@@ -2,7 +2,7 @@ import { FunctionComponent, useState } from 'react';
 import { displayCost } from '../shopping-cart/ShoppingCart';
 import './Slot.css';
 
-export enum Category {
+export const enum Category {
   BasePrice = "Base price",
   Color = "Color",
   Power = "Power",
