@@ -15,13 +15,13 @@
   margin: auto;
   background-color: var(--background-color);
   color: var(--accent-color-dimmed);
-  font-size: calc(10px + 2vmin);
   letter-spacing: .2em;
 }
 
 .configurator {
   display: grid;
   width: min(1000px, 92vw);
+  margin-block: 1vh;
   padding: 2rem;
   border: 1px solid var(--accent-color);
   border-radius: 8px;
